@@ -23,7 +23,6 @@ public class FuncionarioController {
         return funcionarios;
     }
 
-    // Ajustado o nome para o singular, mantendo consistência com a View
     public Funcionario buscarPorId(int id) {
         return funcionarios.get(id);
     }
@@ -40,12 +39,11 @@ public class FuncionarioController {
     public boolean atualizarFreelancer(int id, double novoValorHora, int novasHoras) {
         Funcionario f = funcionarios.get(id);
 
-        // Se a busca retornar null, o funcionário não existe
+
         if (f == null) {
             return false;
         }
 
-        // CORREÇÃO: Testando 'f' e não o Map 'funcionarios'
         if (f instanceof Freelancer freelancer) {
             freelancer.setValorHora(novoValorHora);
             freelancer.setHorasTrabalhadas(novasHoras);
@@ -55,7 +53,6 @@ public class FuncionarioController {
         return false;
     }
 
-    // CORREÇÃO: Nomes de parâmetros mais claros e condizentes com a modelagem
     public boolean atualizarDesenvolvedor(int id, double novoSalarioBase, double novoBonus) {
         Funcionario f = funcionarios.get(id);
 
@@ -63,7 +60,6 @@ public class FuncionarioController {
             return false;
         }
 
-        // CORREÇÃO: Testando 'f' e não o Map 'funcionarios'
         if (f instanceof Desenvolvedor desenvolvedor) {
             desenvolvedor.setSalarioBase(novoSalarioBase);
             desenvolvedor.setBonusProdutividade(novoBonus);

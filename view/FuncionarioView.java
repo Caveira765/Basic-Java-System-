@@ -1,8 +1,6 @@
 package view;
 
 import controller.FuncionarioController;
-// Importe a sua exceção customizada se tiver criado
-// import exceptions.ValorInvalido;
 import model.*;
 
 import java.util.InputMismatchException;
@@ -15,7 +13,6 @@ public class FuncionarioView {
     private FuncionarioController controller;
 
     public FuncionarioView() {
-        // Inicializando as variáveis de instância corretamente
         this.sc = new Scanner(System.in);
         this.controller = new FuncionarioController();
     }
@@ -34,7 +31,7 @@ public class FuncionarioView {
                 System.out.print("Escolha uma opção: ");
 
                 opcao = sc.nextInt();
-                sc.nextLine(); // Limpa o "Enter" que sobra após o nextInt()
+                sc.nextLine();
 
                 switch (opcao) {
                     case 1:
@@ -60,9 +57,8 @@ public class FuncionarioView {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Erro: digite apenas números no menu.");
-                sc.nextLine(); // Limpa a sujeira que o usuário digitou
+                sc.nextLine();
             } catch (Exception e) {
-                // Captura qualquer outro erro para o sistema não "quebrar" na cara do usuário
                 System.out.println("Erro inesperado: " + e.getMessage());
             }
         } while (opcao != 0);
@@ -76,9 +72,9 @@ public class FuncionarioView {
             System.out.print("Escolha o tipo: ");
 
             int tipo = sc.nextInt();
-            sc.nextLine(); // Limpa o buffer
+            sc.nextLine();
 
-            // Excelente iniciativa adicionar o NOME ao sistema!
+
             System.out.print("Digite o nome do funcionário: ");
             String nome = sc.nextLine();
 
@@ -90,7 +86,7 @@ public class FuncionarioView {
                     System.out.print("Digite as horas trabalhadas: ");
                     int horasTrabalhadas = sc.nextInt();
 
-                    // View cria o objeto e envia para o Controller
+
                     controller.adicionarFuncionario(new Freelancer(nome, valorHora, horasTrabalhadas));
                     System.out.println("Freelancer cadastrado com sucesso!");
                     break;
@@ -102,7 +98,7 @@ public class FuncionarioView {
                     System.out.print("Digite o bônus de produtividade: ");
                     double bonus = sc.nextDouble();
 
-                    // View cria o objeto e envia para o Controller
+
                     controller.adicionarFuncionario(new Desenvolvedor(nome, salarioBase, bonus));
                     System.out.println("Desenvolvedor cadastrado com sucesso!");
                     break;
@@ -113,12 +109,8 @@ public class FuncionarioView {
 
         } catch (InputMismatchException e) {
             System.out.println("Erro: Você digitou um texto onde deveria ser um número.");
-            sc.nextLine(); // Limpa a entrada ruim
+            sc.nextLine();
         }
-        // Descomente abaixo se for usar a exceção customizada no construtor das Models
-        // catch (ValorInvalido e) {
-        //     System.out.println("Erro de validação: " + e.getMessage());
-        // }
     }
 
     private void listarFuncionarios() {
@@ -129,12 +121,10 @@ public class FuncionarioView {
         if (funcionarios.isEmpty()) {
             System.out.println("Nenhum funcionário cadastrado no sistema.");
         } else {
-            // Percorrendo o Map (Aquele ponto de atenção para a prova!)
             for (Map.Entry<Integer, Funcionario> entry : funcionarios.entrySet()) {
                 int id = entry.getKey();
                 Funcionario func = entry.getValue();
 
-                // Graças ao Polimorfismo, o calcularPagamento() saberá a fórmula correta
                 System.out.println("ID: " + id + " | " + func.toString() + " | Pagamento final: R$ " + func.calcularPagamento());
             }
         }
@@ -170,7 +160,6 @@ public class FuncionarioView {
                 return;
             }
 
-            // O teste do instanceof garante que não vamos tentar atualizar horas de um Desenvolvedor
             if (func instanceof Freelancer) {
                 System.out.print("Digite o novo valor da hora: ");
                 double novoValorHora = sc.nextDouble();

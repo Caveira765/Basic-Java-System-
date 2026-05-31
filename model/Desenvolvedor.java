@@ -50,7 +50,6 @@ public class Desenvolvedor implements Funcionario {
         this.bonusProdutividade = bonusProdutividade;
     }
 
-    // O toString garante que a impressão no console seja legível
     @Override
     public String toString() {
         return "Desenvolvedor | Nome: " + nome + " | Salário Base: R$ " + salarioBase + " | Bônus: R$ " + bonusProdutividade;
